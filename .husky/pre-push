@@ -1,0 +1,16 @@
+echo "🔍 Prettier (repo-wide)"
+npm run -s format          # prettier . --check
+
+echo "🧹 ESLint (fail on warnings)"
+npm run -s lint -- --max-warnings=0
+
+echo "🧠 Typecheck"
+npm run -s typecheck       # tsc -p tsconfig.app.json --noEmit
+
+echo "🧪 Tests"
+npm run -s test --if-present
+
+echo "🏗️ Build"
+npm run -s build
+
+echo "✅ Pre-push OK"
