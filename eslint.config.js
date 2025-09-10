@@ -16,10 +16,10 @@ export default [
       'node_modules/**',
       'coverage/**',
       'public/**',
-      'eslint.config.js',       
-      'vite.config.*',          
+      'eslint.config.js',
+      'vite.config.*',
       'vitest.config.*',
-      '**/*.config.*'           
+      '**/*.config.*',
     ],
   },
 
