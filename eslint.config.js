@@ -9,82 +9,82 @@ import globals from 'globals';
 import prettier from 'eslint-config-prettier';
 
 export default [
-  // Ignore build artifacts
-  {
-    ignores: [
-      'dist/**',
-      'node_modules/**',
-      'coverage/**',
-      'public/**',
-      'eslint.config.js',
-      'vite.config.*',
-      'vitest.config.*',
-      '**/*.config.*',
-    ],
-  },
-
-  // Base JS rules
-  js.configs.recommended,
-
-  // TypeScript rules (type-aware)
-  ...tseslint.configs.recommendedTypeChecked,
-
-  // React + Hooks + a11y
-  {
-    plugins: {
-      react,
-      'react-hooks': reactHooks,
-      'jsx-a11y': jsxA11y,
+    // Ignore build artifacts
+    {
+        ignores: [
+            'dist/**',
+            'node_modules/**',
+            'coverage/**',
+            'public/**',
+            'eslint.config.js',
+            'vite.config.*',
+            'vitest.config.*',
+            '**/*.config.*',
+        ],
     },
-    settings: { react: { version: 'detect' } },
-    rules: {
-      // React 17+ (automatic JSX transform)
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
 
-      // Hooks
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
+    // Base JS rules
+    js.configs.recommended,
 
-      // Accessibility
-      'jsx-a11y/alt-text': 'warn',
-      'jsx-a11y/anchor-is-valid': 'warn',
-      'jsx-a11y/no-autofocus': 'off', // enable if you prefer
-    },
-  },
+    // TypeScript rules (type-aware)
+    ...tseslint.configs.recommendedTypeChecked,
 
-  // Import hygiene + unused imports
-  {
-    plugins: { import: importPlugin, 'unused-imports': unusedImports },
-    rules: {
-      'unused-imports/no-unused-imports': 'warn',
-      'unused-imports/no-unused-vars': [
-        'warn',
-        { args: 'after-used', argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-      ],
-      'import/order': [
-        'warn',
-        {
-          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-          'newlines-between': 'always',
-          alphabetize: { order: 'asc', caseInsensitive: true },
+    // React + Hooks + a11y
+    {
+        plugins: {
+            react,
+            'react-hooks': reactHooks,
+            'jsx-a11y': jsxA11y,
         },
-      ],
-    },
-  },
+        settings: { react: { version: 'detect' } },
+        rules: {
+            // React 17+ (automatic JSX transform)
+            'react/react-in-jsx-scope': 'off',
+            'react/jsx-uses-react': 'off',
 
-  // Language options (TypeScript project + globals)
-  {
-    languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
-      parserOptions: {
-        // point at your tsconfigs that include "src"
-        project: ['./tsconfig.app.json', './tsconfig.node.json'],
-        tsconfigRootDir: process.cwd(),
-      },
-    },
-  },
+            // Hooks
+            'react-hooks/rules-of-hooks': 'error',
+            'react-hooks/exhaustive-deps': 'warn',
 
-  // Disable rules that conflict with Prettier
-  prettier,
+            // Accessibility
+            'jsx-a11y/alt-text': 'warn',
+            'jsx-a11y/anchor-is-valid': 'warn',
+            'jsx-a11y/no-autofocus': 'off', // enable if you prefer
+        },
+    },
+
+    // Import hygiene + unused imports
+    {
+        plugins: { import: importPlugin, 'unused-imports': unusedImports },
+        rules: {
+            'unused-imports/no-unused-imports': 'warn',
+            'unused-imports/no-unused-vars': [
+                'warn',
+                { args: 'after-used', argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+            ],
+            'import/order': [
+                'warn',
+                {
+                    groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+                    'newlines-between': 'always',
+                    alphabetize: { order: 'asc', caseInsensitive: true },
+                },
+            ],
+        },
+    },
+
+    // Language options (TypeScript project + globals)
+    {
+        languageOptions: {
+            globals: { ...globals.browser, ...globals.node },
+            parserOptions: {
+                // point at your tsconfigs that include "src"
+                project: ['./tsconfig.app.json', './tsconfig.node.json'],
+                tsconfigRootDir: process.cwd(),
+            },
+        },
+    },
+
+    // Disable rules that conflict with Prettier
+    prettier,
 ];
