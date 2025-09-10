@@ -1,26 +1,12 @@
-echo "🔧 Prettier --write (repo-wide)…"
-npm run -s format:fix  # prettier . --write
 
-# If Prettier changed anything, stop and ask for a commit
-if ! git diff --quiet; then
-  echo "❌ Pre-push blocked: Prettier formatted files."
-  echo "   Run: git add -A && git commit -m \"chore: format\" && git push again."
-  git status --porcelain
-  exit 1
-fi
+echo "🔍 Prettier (repo-wide)"
+npm run -s format          # prettier . --check
 
-echo "🧹 ESLint --fix…"
-npm run -s lint:fix || true
-
-if ! git diff --quiet; then
-  echo "❌ Pre-push blocked: ESLint fixed files."
-  echo "   Run: git add -A && git commit -m \"chore: lint fix\" && git push again."
-  git status --porcelain
-  exit 1
-fi
+echo "🧹 ESLint (no warnings)"
+npm run -s lint -- --max-warnings=0
 
 echo "🧠 Typecheck"
-npm run -s typecheck
+npm run -s typecheck       # tsc -p tsconfig.app.json --noEmit
 
 echo "🧪 Tests"
 npm run -s test --if-present
