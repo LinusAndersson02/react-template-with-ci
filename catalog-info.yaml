@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: react-template-with-ci
+  annotations:
+    github.com/project-slug: LinusAndersson02/react-template-with-ci
+spec:
+  type: other
+  lifecycle: unknown
+  owner: guests
